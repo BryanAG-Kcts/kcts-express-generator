@@ -8,7 +8,7 @@
     "dev": "ts-node-dev src/index.ts"
   },
   "bin": {
-    "kcts": "ts-node-dev src/index.ts"
+    "kcts": "src/index.ts"
   },
   "keywords": [
     "project",
