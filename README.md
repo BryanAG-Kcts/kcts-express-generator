@@ -6,7 +6,7 @@
 ## ⬇ Installation
 
 ```sh
-npm install -g express-generator
+npm install -g kcts-express-generator
 ```
 
 ## 🛠 Quick Start
@@ -33,8 +33,8 @@ npm run dev
 
 ```bash
 kcts projectName --flag
-npm install
 cd projectName
+npm install
 npm run dev
 ```
 
