@@ -19,4 +19,4 @@ export const processArguments = argv(
 const { _ } = processArguments
 export const [dirName] = _
 const [typeProject] = unknowArgs
-export const mod = typeProject !== undefined ? typeProject.replace('-', '') as SwitchCase : 'common'
+export const mod = typeProject !== undefined ? typeProject.replace('--', '') as SwitchCase : 'common'
