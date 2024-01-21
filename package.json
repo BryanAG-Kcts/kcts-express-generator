@@ -1,14 +1,20 @@
 {
   "name": "kcts-express-generator",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple express generator",
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
     "dev": "ts-node-dev src/index.ts"
   },
-  "keywords": [],
-  "author": "",
+  "bin": {
+    "kcts": "ts-node-dev src/index.ts"
+  },
+  "keywords": [
+    "project",
+    "generator"
+  ],
+  "author": "BryanAG-kcts",
   "license": "ISC",
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
