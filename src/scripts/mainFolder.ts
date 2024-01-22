@@ -1,4 +1,4 @@
-import { copy, ensureDir, ensureDirSync } from 'fs-extra'
+import { copy, ensureDir, ensureDirSync, renameSync } from 'fs-extra'
 import { join } from 'path'
 import { dirName } from './getArgs'
 export const mainFolder = async (): Promise<void> => {
@@ -10,6 +10,7 @@ export const mainFolder = async (): Promise<void> => {
     const copyFiles = copy(generalFiles, dirName)
 
     await Promise.all([srcFolder, copyFiles])
+    renameSync(join(dirName, 'kcts'), join(dirName, '.gitignore'))
   } catch (e) {
     console.log(e)
   }
