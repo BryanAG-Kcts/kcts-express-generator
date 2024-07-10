@@ -16,5 +16,4 @@ export const expressFlavors = [
   typeScript
 ]
 
-export type ExpressFlavors = typeof expressFlavorMapping[keyof typeof expressFlavorMapping]
-export type ExpressFlavorMappingKeys = keyof typeof expressFlavorMapping
+export type ExpressFlavor = typeof expressFlavorMapping[keyof typeof expressFlavorMapping]

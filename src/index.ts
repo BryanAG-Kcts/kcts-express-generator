@@ -1,14 +1,12 @@
 #!/usr/bin/env/ node
-import { log } from './shared/constants/cli/logger'
-import { expressFlavorMapping, expressFlavors } from './shared/constants/cli/projectTypes'
-import { expressFlavorPrompt, projectNamePrompt, welcomeText } from './shared/constants/local/main'
-import { textListPrompt } from './shared/constants/prompts/listPrompts'
-import { textPrompt } from './shared/constants/prompts/textPrompts'
+import { generateProjectController } from './controllers/create-express/generateProject'
+import { userCommandsController } from './controllers/user-cli/userCommands'
 
 void (async () => {
-  log(welcomeText)
-  const projectName = await textPrompt(projectNamePrompt, 'Kactuswow')
-
-  const rawExpressFlavor = await textListPrompt(expressFlavorPrompt, expressFlavors[0], expressFlavors)
-  console.log(projectName, rawExpressFlavor, expressFlavorMapping)
+  userCommandsController.userWelcome()
+  const projectName = await userCommandsController.projectName()
+  const expressFlavor = await userCommandsController.selectProjectFlavor()
+  await generateProjectController.generateProject(projectName, expressFlavor)
+  userCommandsController.instructions(projectName)
+  userCommandsController.userLeave()
 })()
