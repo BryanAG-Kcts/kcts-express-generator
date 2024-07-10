@@ -18,7 +18,6 @@ export const generateProjectController = {
       log(projectFailed)
       error((err as Error).message)
       log(closing)
-      log(' ')
       process.exit(1)
     }
   }
