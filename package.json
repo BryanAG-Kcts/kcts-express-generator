@@ -2,11 +2,11 @@
   "name": "kcts-express-generator",
   "version": "1.0.0",
   "description": "A simple express project generator",
-  "main": "src/index.ts",
+  "main": "build/index.js",
   "scripts": {
-    "dev": "ts-node-dev .",
-    "build": "tsc && npm run templates",
-    "templates": "node ./builder.js"
+    "dev": "ts-node-dev src/index.ts",
+    "build": "tsc",
+    "pack": "npm run build && npm pack"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
