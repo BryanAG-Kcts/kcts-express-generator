@@ -1,6 +1,6 @@
 {
   "name": "kcts-express-generator",
-  "version": "3.0.0",
+  "version": "3.0.2",
   "description": "A simple express project generator",
   "main": "build/index.js",
   "scripts": {
