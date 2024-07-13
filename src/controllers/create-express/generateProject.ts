@@ -1,7 +1,7 @@
-import { copy, ensureDir, rename } from 'fs-extra'
 import { log, error } from '../../shared/constants/cli/logger'
 import { ExpressFlavor } from '../../shared/constants/cli/projectTypes'
-import { closing, emptySourceFolders, projectFailed, projectSuccess } from './constants'
+import { closing, emptySourceFoldersName, projectFailed, projectSuccess } from './constants'
+import { copy, ensureDir, rename } from 'fs-extra'
 import { join } from 'path'
 
 export const generateProjectController = {
@@ -9,19 +9,23 @@ export const generateProjectController = {
     const cwd = process.cwd()
 
     try {
-      await ensureDir(projectName)
+      const mainProject = join(cwd, projectName)
+      await ensureDir(mainProject)
 
-      const folder = join(cwd, `/public/templates/template-${expressFlavor}`)
+      const expressFolder = join(__dirname, `../../../public/templates/template-${expressFlavor}`)
+      await copy(expressFolder, mainProject)
+
       const _gitIgnore = join(cwd, `${projectName}/_gitignore`)
       const gitIgnore = join(cwd, `${projectName}/.gitignore`)
-      await copy(folder, projectName)
 
-      const createdEmptySourceFolders = this.generateFolders(emptySourceFolders, `${projectName}/src`)
-      const publicFolder = this.generateFolders(['public'], projectName)
+      const emptySourceFolders = join(cwd, `${projectName}/src`)
+      const publicFolder = join(cwd, `${projectName}/public`)
 
-      await rename(_gitIgnore, gitIgnore)
-      await createdEmptySourceFolders
-      await publicFolder
+      await Promise.all([
+        rename(_gitIgnore, gitIgnore),
+        this.generateFolders(emptySourceFoldersName, emptySourceFolders),
+        this.generateFolders(['public'], publicFolder)
+      ])
 
       log(projectSuccess)
     } catch (err) {
@@ -31,11 +35,9 @@ export const generateProjectController = {
       process.exit(1)
     }
   },
-
   async generateFolders (folders: string[], dest: string) {
-    const cwd = process.cwd()
     const promiseFolder = folders.map(async folder => {
-      const path = join(cwd, `${dest}/${folder}`)
+      const path = join(dest, folder)
       return await ensureDir(path)
     })
 
